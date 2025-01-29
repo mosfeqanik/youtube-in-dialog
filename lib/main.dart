@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomePage(),
     );
   }
@@ -28,10 +29,10 @@ class HomePage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => const YouTubeVideoDialog(
-                // videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                videoUrl: 'https://www.youtube.com/shorts/uycvlIhCJgY',
-              ),
+              builder: (context) =>  const YouTubeVideoDialog(
+                      // videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                      videoUrl: 'https://www.youtube.com/shorts/uycvlIhCJgY',
+                    ),
             );
           },
           child: const Text('Show YouTube Video'),
@@ -55,14 +56,16 @@ class _YouTubeVideoDialogState extends State<YouTubeVideoDialog> {
   void updateAspectRatio() {
     bool isShort = isShortVideo();
     setState(() {
-      aspectRatio = isShort ?  9 / 16 :16 / 9 ;
+      aspectRatio = isShort ? 9 / 16 : 16 / 9;
     });
     print("isShortVideo: $isShort, aspectRatio: $aspectRatio");
   }
+
   bool isShortVideo() {
     String videoId = widget.videoUrl!;
     return videoId.contains('shorts');
   }
+
   @override
   void initState() {
     super.initState();
@@ -111,3 +114,4 @@ class _YouTubeVideoDialogState extends State<YouTubeVideoDialog> {
     );
   }
 }
+
